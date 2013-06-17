@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class MainMenu extends JFrame implements ActionListener {
     private  JMenuBar menuBar;
     private  JMenuItem menuItem2;
+    private  JMenuItem menuItem3;
 
     void createMenuComponents() {
         menuBar = new JMenuBar();
@@ -29,10 +30,10 @@ public class MainMenu extends JFrame implements ActionListener {
 
         menu = new JMenu("Zgłoszenia " +
                 "napraw");
-        menuItem = new JMenuItem("Dodanie");
-        menu.add(menuItem);
-        menuItem = new JMenuItem("Usunięcie");
-        menu.add(menuItem);
+        menuItem2 = new JMenuItem("Dodanie");
+        menu.add(menuItem2);
+        menuItem3 = new JMenuItem("Usunięcie");
+        menu.add(menuItem3);
         menuItem = new JMenuItem("Przydzielenie zespołu serwisowego");
         menu.add(menuItem);
         menuItem = new JMenuItem("Wyszukanie informacji o gwarancji");
@@ -51,8 +52,8 @@ public class MainMenu extends JFrame implements ActionListener {
 
         menu = new JMenu("Zespoły " +
                 "serwisowe");
-        menuItem2 = new JMenuItem("Dodanie");
-        menu.add(menuItem2);
+        menuItem = new JMenuItem("Dodanie");
+        menu.add(menuItem);
         menuItem = new JMenuItem("Usunięcie");
         menu.add(menuItem);
         menuItem = new JMenuItem("Przydzielenie pracownika");
@@ -82,6 +83,13 @@ public class MainMenu extends JFrame implements ActionListener {
         Object source = e.getSource();
         if (source == menuItem2) {
             AddTeam menu = new AddTeam();
+
+            menu.setVisible(true);
+            this.dispose();
+        }
+        if (source == menuItem3) {
+            EraseList menu = new EraseList();
+
             menu.setVisible(true);
             this.dispose();
         }

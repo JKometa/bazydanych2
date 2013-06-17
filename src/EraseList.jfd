@@ -1,0 +1,22 @@
+JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_17" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.GridLayout ) {
+			"columns": 2
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "zgloszenia"
+					addEvent( new FormEvent( "javax.swing.event.ListSelectionListener", "valueChanged", "zgloszeniaValueChanged", true ) )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 100, 25 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

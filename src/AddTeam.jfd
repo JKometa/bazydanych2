@@ -6,8 +6,8 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 			name: "dodawanie"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-				"$columnSpecs": "155, 66"
-				"$rowSpecs": "0, 70, 0"
+				"$columnSpecs": "137, 66"
+				"$rowSpecs": "0, 33, 0, 0, 0, 0"
 				"$hGap": 5
 				"$vGap": 5
 				"$alignLeft": true
@@ -15,10 +15,57 @@ new FormModel {
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 204, 204, 204, 255 )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "Wprowadz"
+					"text": "Wrowadz dane Zgloszenia"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "opis"
+					name: "idSprzetu"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridy": 1
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Id Sprzetu"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 1
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "idLokalizacji"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 2
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "IdLokalizacji"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 2
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "idAdministratora"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 3
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "IdAdministratora"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 3
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "NazwaGwaranta"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 4
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "Nazwa gwaranta"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 4
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "next"
@@ -26,20 +73,24 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "nextActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridx": 1
-					"gridy": 2
+					"gridy": 5
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "card1"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "135, 96"
-				"$rowSpecs": "0, 64, 0"
+				"$rowSpecs": "0, 64, 0, 0, 0, 0"
 				"$hGap": 5
 				"$vGap": 5
 				"$alignLeft": true
 				"$alignTop": true
 			} ) {
 				name: "panel2"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "Wprowadz2"
+					"text": "Wprowadz cos"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "dodaj2"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
@@ -51,7 +102,7 @@ new FormModel {
 					"text": "next"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridx": 1
-					"gridy": 2
+					"gridy": 5
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "card2"
