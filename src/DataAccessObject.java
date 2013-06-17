@@ -24,7 +24,7 @@ public class DataAccessObject {
     public static void connect(String userName, String password) {
 	try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://jatokor.net user=bd2.elka&password=admin1");
+            conn = DriverManager.getConnection("jdbc:mysql://jatokor.net:3306", "bd2.elka", "admin1");
 	}
 	catch(SQLException e) {
 	    System.out.println(e.getMessage() + "-> problem z połczeniem 2");
