@@ -37,6 +37,7 @@ public class DataAccessObject {
             Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     public static void disconnect() {
 	try {
 	    stmt.close();
@@ -44,6 +45,30 @@ public class DataAccessObject {
 	} catch(SQLException e) {
 	    System.out.println(e.getMessage() + "-> problem z połczeniem 3");
 	}
+    }
+    
+    public LinkedList<Device> getDevices() {
+        LinkedList<Device> devices = new LinkedList<>();
+        Device n;
+	ResultSet rset;
+	try {
+	    stmt = conn.prepareStatement("SELECT * FROM \"Urządzenie\"");
+	    rset = stmt.executeQuery();
+	    while(rset.next()) {
+                n = new Device();
+                n.id = Integer.parseInt(rset.getObject("IdSprzetu").toString());
+		n.type = rset.getObject("NazwaRodzaju").toString();
+                devices.add(n);
+	    }
+	    rset.close();
+	}
+	catch(SQLException e) {
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	}
+	catch(NullPointerException e2) {
+	    System.out.println("Nuull");
+	}
+        return devices;
     }
     
     public int addNotification(int deviceId, int teamId, String status) {
@@ -101,5 +126,10 @@ public class DataAccessObject {
         public int device;
         public int team;
         public int admin;
-    };
+    }
+    
+    class Device {
+        public int id;
+        public String type;
+    }
 }
