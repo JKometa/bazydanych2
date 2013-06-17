@@ -21,8 +21,7 @@ public class DataAccessObject {
     private boolean isAdmin = false;
     private int id;
     
-    public static void connect(String userName, String password) {  
-	String connString = "jdbc:oracle:thin:@//ikar.elka.pw.edu.pl:1521/elka.elka.pw.edu.pl";
+    public static void connect(String userName, String password) {
 	try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection("jdbc:mysql://jatokor.net user=bd2.elka&password=admin1");
@@ -100,29 +99,6 @@ public class DataAccessObject {
         return n;
     }
     
-    public int addNotification(int deviceId, int teamId, String status) {
-	ResultSet rset;
-        try {
-            stmt = conn.prepareStatement("SELECT IdAdministratora FROM Administrator WHERE Administrator.AdresSieci=Siec.AdresSieci AND"+
-                    "Siec.IdSprzetu=?");
-            stmt.setInt(1, deviceId);
-	    rset = stmt.executeQuery();
-            rset.next();
-            int adminId = Integer.parseInt(rset.getObject("IdAdministratora").toString());
-            stmt = conn.prepareStatement("INSERT (IdZagloszenia, IdSprzetu, IdZespolu, IdAdministratora, Status) INTO "
-                    +"\"Zgłoszenie naprawy\" VALUES (id_notif_seq.NEXTVAL, ?, ?, ?, ?)");
-            stmt.setInt(1, deviceId);
-            stmt.setInt(2, teamId);
-            stmt.setInt(3, adminId);
-            stmt.setString(4, status);
-            stmt.executeQuery();
-        }
-        catch(SQLException e) {
-            return -1;
-        }
-        return 0;
-    }
-    
     public LinkedList<Notification> getNotifications(int adminId) {
         LinkedList<Notification> notifs = new LinkedList<>();
         Notification n;
@@ -148,17 +124,6 @@ public class DataAccessObject {
 	    System.out.println("Nuull");
 	}
         return notifs;
-    }
-    
-    public void deleteNotifications(int id) {
-	try {
-	    stmt = conn.prepareStatement("DELETE FROM \"Zgłoszenia napraw\" WHERE IdZgloszenia=?");
-	    stmt.setInt(1, id);
-	    stmt.executeQuery();
-	}
-	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
-	}
     }
     
     public LinkedList<Worker> getWorkers() {
@@ -211,6 +176,54 @@ public class DataAccessObject {
 	    System.out.println("Nuull");
 	}
         return teams;
+    }
+    
+    public int addNotification(int deviceId, int teamId, String status) {
+	ResultSet rset;
+        try {
+            stmt = conn.prepareStatement("SELECT IdAdministratora FROM Administrator WHERE Administrator.AdresSieci=Siec.AdresSieci AND"+
+                    "Siec.IdSprzetu=?");
+            stmt.setInt(1, deviceId);
+	    rset = stmt.executeQuery();
+            rset.next();
+            int adminId = Integer.parseInt(rset.getObject("IdAdministratora").toString());
+            stmt = conn.prepareStatement("INSERT (IdZagloszenia, IdSprzetu, IdZespolu, IdAdministratora, Status) INTO "
+                    +"\"Zgłoszenie naprawy\" VALUES (id_notif_seq.NEXTVAL, ?, ?, ?, ?)");
+            stmt.setInt(1, deviceId);
+            stmt.setInt(2, teamId);
+            stmt.setInt(3, adminId);
+            stmt.setString(4, status);
+            stmt.executeQuery();
+        }
+        catch(SQLException e) {
+            return -1;
+        }
+        return 0;
+    }
+    
+    public void deleteNotifications(int id) {
+	try {
+	    stmt = conn.prepareStatement("DELETE FROM \"Zgłoszenia napraw\" WHERE IdZgloszenia=?");
+	    stmt.setInt(1, id);
+	    stmt.executeQuery();
+	}
+	catch(SQLException e) {
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	}
+    }
+    
+    public int changeTeamNotification(int notificationId, int teamId) {
+	try {
+	    stmt = conn.prepareStatement("UPDATE \"Zgłoszenia napraw\" SET IdZespolu=? WHERE IdZgloszenia=?");
+	    stmt.setInt(1, teamId);
+	    stmt.setInt(2, notificationId);
+	    stmt.executeQuery();
+	}
+	catch(SQLException e) {
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+            return 1;
+	}
+        return 0;
     }
     
     class Notification {
