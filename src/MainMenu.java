@@ -70,6 +70,7 @@ public class MainMenu extends JFrame implements ActionListener {
         menuBar.add(menu);
 
         menuItem2.addActionListener(this);
+        menuItem3.addActionListener(this);
     }
 
     public MainMenu() {

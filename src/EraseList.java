@@ -14,13 +14,13 @@ import java.util.ArrayList;
  */
 public class EraseList extends JFrame {
     public EraseList() {
-        initComponents();
+
         listaZgloszen.add("Pierwsze");
         listaZgloszen.add("Drugie");
         listaZgloszen.add("Trzecie");
         listaZgloszen.add("Czwarte");
         listaZgloszen.add("Piate");
-
+        initComponents();
     }
 
     private void zgloszeniaValueChanged(ListSelectionEvent e) {
@@ -34,12 +34,11 @@ public class EraseList extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - mdz mdz
         scrollPane1 = new JScrollPane();
-        zgloszenia = new JList(listaZgloszen.toArray());
-
+        zgloszenia = new JList();
 
         //======== this ========
         Container contentPane = getContentPane();
-        contentPane.setLayout(new GridLayout(1, 2));
+        contentPane.setLayout(new CardLayout());
 
         //======== scrollPane1 ========
         {
@@ -53,12 +52,12 @@ public class EraseList extends JFrame {
             });
             scrollPane1.setViewportView(zgloszenia);
         }
-        contentPane.add(scrollPane1);
+        contentPane.add(scrollPane1, "card1");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         this.setSize(600,400);
-        this.add(contentPane);
+        this.add(scrollPane1);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
