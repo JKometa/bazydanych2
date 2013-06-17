@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="LoginPage">
+  <grid id="27dc6" binding="loginPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="209" width="500" height="211"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="cc2e1" class="javax.swing.JLabel" binding="helloLabel">
+        <constraints border-constraint="North"/>
+        <properties>
+          <enabled value="false"/>
+          <font size="48" style="1"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <opaque value="false"/>
+          <text value="LOGOWANIE"/>
+          <verticalTextPosition value="0"/>
+        </properties>
+      </component>
+      <grid id="25f6b" layout-manager="GridBagLayout">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <enabled value="true"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="a0da7" class="javax.swing.JLabel" binding="usernameLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <alignmentY value="0.5"/>
+              <enabled value="false"/>
+              <font size="22"/>
+              <labelFor value="edc7"/>
+              <preferredSize width="70" height="27"/>
+              <text value="login: "/>
+            </properties>
+          </component>
+          <component id="8390" class="javax.swing.JButton" binding="loginButton">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <actionCommand value="Login"/>
+              <font size="22"/>
+              <hideActionText value="false"/>
+              <text value="Loguj"/>
+            </properties>
+          </component>
+          <component id="54b4a" class="javax.swing.JButton" binding="exitButton">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <actionCommand value="Exit"/>
+              <font size="22"/>
+              <text value="Wyjdź"/>
+            </properties>
+          </component>
+          <component id="3f74" class="javax.swing.JLabel" binding="passwordLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font size="22"/>
+              <text value="hasło: "/>
+            </properties>
+          </component>
+          <component id="1f475" class="javax.swing.JPasswordField" binding="passwordText">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+            </properties>
+          </component>
+          <component id="edc7" class="javax.swing.JTextField" binding="loginText">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <preferredSize width="200" height="33"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
