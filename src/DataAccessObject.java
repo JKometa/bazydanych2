@@ -71,6 +71,35 @@ public class DataAccessObject {
         return devices;
     }
     
+    public Warranty getWarranty(int deviceId) {
+        Warranty n = new Warranty();
+	ResultSet rset;
+	try {
+	    stmt = conn.prepareStatement("SELECT A.IdGwarancji, A.NazwaGwaranta, A.PoczatekGwarancji, A.KoniecGwarancji,"+
+                    "A.NumerUmowy, B.Ulica, B.Miasto, B.NrTelefonu FROM Gwarancja A, Gwarant B, \"Właściwości uzytkowe\" C "+
+                    "WHERE A.NazwaGwaranta=B.NazwaGwaranta AND C.IdGwarancji=A.IdGwarancji AND C.IdSprzetu=?");
+	    stmt.setInt(1, deviceId);
+	    rset = stmt.executeQuery();
+	    rset.next();
+            n.id = Integer.parseInt(rset.getObject("A.IdGwarancji").toString());
+            n.warrantyName = rset.getObject("A.NazwaGwaranta").toString();
+            n.begin = rset.getObject("A.PoczatekGwarancji").toString();
+            n.end = rset.getObject("A.KoniecGwarancji").toString();
+            n.street = rset.getObject("B.Ulica").toString();
+            n.city = rset.getObject("B.Miasto").toString();
+            n.nr = Integer.parseInt(rset.getObject("A.NumerUmowy").toString());
+            n.phone = Integer.parseInt(rset.getObject("B.NrTelefonu").toString());
+	    rset.close();
+	}
+	catch(SQLException e) {
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	}
+	catch(NullPointerException e2) {
+	    System.out.println("Nuull");
+	}
+        return n;
+    }
+    
     public int addNotification(int deviceId, int teamId, String status) {
 	ResultSet rset;
         try {
@@ -121,6 +150,17 @@ public class DataAccessObject {
         return notifs;
     }
     
+    public void deleteNotifications(int id) {
+	try {
+	    stmt = conn.prepareStatement("DELETE FROM \"Zgłoszenia napraw\" WHERE IdZgloszenia=?");
+	    stmt.setInt(1, id);
+	    stmt.executeQuery();
+	}
+	catch(SQLException e) {
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	}
+    }
+    
     class Notification {
         public int id;
         public int device;
@@ -131,5 +171,16 @@ public class DataAccessObject {
     class Device {
         public int id;
         public String type;
+    }
+    
+    class Warranty {
+        public int id;
+        public String warrantyName;
+        public String street;
+        public String city;
+        public int phone;
+        public String begin;
+        public String end;
+        public int nr;
     }
 }
