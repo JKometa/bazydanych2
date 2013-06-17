@@ -161,6 +161,58 @@ public class DataAccessObject {
 	}
     }
     
+    public LinkedList<Worker> getWorkers() {
+        LinkedList<Worker> workers = new LinkedList<>();
+        Worker n;
+	ResultSet rset;
+	try {
+	    stmt = conn.prepareStatement("SELECT * FROM \"Pracownik\"");
+	    rset = stmt.executeQuery();
+	    while(rset.next()) {
+                n = new Worker();
+                n.id = Integer.parseInt(rset.getObject("IdPracownika").toString());
+		n.name = rset.getObject("Imie").toString();
+		n.surname = rset.getObject("Nazwisko").toString();
+		n.status = rset.getObject("Status").toString();
+                n.teamId = Integer.parseInt(rset.getObject("IdZespolu").toString());
+                workers.add(n);
+	    }
+	    rset.close();
+	}
+	catch(SQLException e) {
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	}
+	catch(NullPointerException e2) {
+	    System.out.println("Nuull");
+	}
+        return workers;
+    }
+    
+    public LinkedList<Team> getTeams() {
+        LinkedList<Team> teams = new LinkedList<>();
+        Team n;
+	ResultSet rset;
+	try {
+	    stmt = conn.prepareStatement("SELECT * FROM \"Zespół serwisowy\"");
+	    rset = stmt.executeQuery();
+	    while(rset.next()) {
+                n = new Team();
+                n.id = Integer.parseInt(rset.getObject("IdZespolu").toString());
+		n.name = rset.getObject("NazwaZespolu").toString();
+		n.opis = rset.getObject("Opis").toString();
+                teams.add(n);
+	    }
+	    rset.close();
+	}
+	catch(SQLException e) {
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	}
+	catch(NullPointerException e2) {
+	    System.out.println("Nuull");
+	}
+        return teams;
+    }
+    
     class Notification {
         public int id;
         public int device;
@@ -182,5 +234,19 @@ public class DataAccessObject {
         public String begin;
         public String end;
         public int nr;
+    }
+    
+    class Worker {
+        public int id;
+        public String name;
+        public String surname;
+        public int teamId;
+        public String status;
+    }
+    
+    class Team {
+        public int id;
+        public String name;
+        public String opis;
     }
 }
