@@ -1,5 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -8,8 +9,9 @@ import java.awt.*;
  * Time: 01:49
  * To change this template use File | Settings | File Templates.
  */
-public class MainMenu extends JFrame {
+public class MainMenu extends JFrame implements ActionListener {
     private  JMenuBar menuBar;
+    private  JMenuItem menuItem2;
 
     void createMenuComponents() {
         menuBar = new JMenuBar();
@@ -49,8 +51,8 @@ public class MainMenu extends JFrame {
 
         menu = new JMenu("Zespoły " +
                 "serwisowe");
-        menuItem = new JMenuItem("Dodanie");
-        menu.add(menuItem);
+        menuItem2 = new JMenuItem("Dodanie");
+        menu.add(menuItem2);
         menuItem = new JMenuItem("Usunięcie");
         menu.add(menuItem);
         menuItem = new JMenuItem("Przydzielenie pracownika");
@@ -65,6 +67,8 @@ public class MainMenu extends JFrame {
         menuItem = new JMenuItem("Wyszukanie urządzenia");
         menu.add(menuItem);
         menuBar.add(menu);
+
+        menuItem2.addActionListener(this);
     }
 
     public MainMenu() {
@@ -72,5 +76,15 @@ public class MainMenu extends JFrame {
         this.setJMenuBar(menuBar);
         this.pack();
         this.setLocationRelativeTo(null);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if (source == menuItem2) {
+            AddTeam menu = new AddTeam();
+            menu.setVisible(true);
+            this.dispose();
+        }
+        return;
     }
 }
