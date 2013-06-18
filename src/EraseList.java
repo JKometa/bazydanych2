@@ -42,7 +42,7 @@ public class EraseList extends JFrame {
         DataAccessObject.Notification notification = notifications.get(index);
         DataAccessObject.disconnect();
         if(notification.id == 0) {
-            szczegolyZgloszenia.setText("Brak zdefiniowanej gwarancji dla urządzenia");
+            szczegolyZgloszenia.setText("Brak zdefiniowanych szczegółów dla zgłoszenia");
             return;
         }
         szczegolyZgloszenia.setText("Id zgłoszenia: "+notification.id+"\n"+
