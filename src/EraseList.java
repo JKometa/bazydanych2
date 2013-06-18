@@ -36,6 +36,21 @@ public class EraseList extends JFrame {
 
     private void zgloszeniaValueChanged(ListSelectionEvent e) {
         // TODO add your code here
+        int index = zgloszenia.getSelectedIndex();
+
+        DataAccessObject.connect(null,null);
+        DataAccessObject.Notification notification = notifications.get(index);
+        DataAccessObject.disconnect();
+        if(notification.id == 0) {
+            szczegolyZgloszenia.setText("Brak zdefiniowanej gwarancji dla urządzenia");
+            return;
+        }
+        szczegolyZgloszenia.setText("Id zgłoszenia: "+notification.id+"\n"+
+                "Urządzenie: "+notification.device+"\n"+
+                "Opis: "+notification.opis+"\n"
+                 );
+
+
 
 
     }
