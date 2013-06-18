@@ -29,7 +29,7 @@ public class AddNotification extends JFrame {
 
             //opis.getText()   DA CI STRINGA OPISU
             //Integer.parseInt(idSprzet.getText())   DA CI ID SPRZETU
-            //STATUS ZAWSZE BEDZIE USTAWIONE NA NOWE
+            //STATUS ZAWSZE BEDZIE USTAWIONE NA NOWE.
 
 
 
