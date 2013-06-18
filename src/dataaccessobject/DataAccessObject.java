@@ -84,7 +84,7 @@ public class DataAccessObject {
 	ResultSet rset;
 	try {
 	    stmt = conn.prepareStatement("SELECT A.IdGwarancji, A.NazwaGwaranta, A.PoczatekGwarancji, A.KoniecGwarancji,"+
-                    "A.NumerUmowy, B.Ulica, B.Miasto, B.NrTelefonu FROM Gwarancja A, Gwarant B, 'Wlasciwosci uzytkowe' C "+
+                    "A.NumerUmowy, B.Ulica, B.Miasto, B.NrTelefonu FROM Gwarancja A, Gwarant B, `Wlasciwosci uzytkowe` C "+
                     "WHERE A.NazwaGwaranta=B.NazwaGwaranta AND C.IdGwarancji=A.IdGwarancji AND C.IdSprzetu=?");
 	    stmt.setInt(1, deviceId);
 	    rset = stmt.executeQuery();
@@ -113,7 +113,7 @@ public class DataAccessObject {
         DataAccessObject.Notification n;
 	ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM 'Zgloszenia napraw' WHERE IdAdministratora=?");
+	    stmt = conn.prepareStatement("SELECT * FROM `Zgloszenia napraw` WHERE IdAdministratora=?");
 	    stmt.setInt(1, adminId);
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
@@ -167,7 +167,7 @@ public class DataAccessObject {
         DataAccessObject.Team n;
 	ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM 'Zespol serwisowy'");
+	    stmt = conn.prepareStatement("SELECT * FROM `Zespol serwisowy`");
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
                 n = new DataAccessObject.Team();
@@ -212,7 +212,7 @@ public class DataAccessObject {
     
     public void deleteNotifications(int id) {
 	try {
-	    stmt = conn.prepareStatement("DELETE FROM 'Zgloszenia napraw' WHERE IdZgloszenia=?");
+	    stmt = conn.prepareStatement("DELETE FROM `Zgloszenia napraw` WHERE IdZgloszenia=?");
 	    stmt.setInt(1, id);
 	    stmt.executeQuery();
 	}
@@ -223,7 +223,7 @@ public class DataAccessObject {
     
     public int changeTeamNotification(int notificationId, int teamId) {
 	try {
-	    stmt = conn.prepareStatement("UPDATE 'Zgloszenia napraw' SET IdZespolu=? WHERE IdZgloszenia=?");
+	    stmt = conn.prepareStatement("UPDATE `Zgloszenia napraw` SET IdZespolu=? WHERE IdZgloszenia=?");
 	    stmt.setInt(1, teamId);
 	    stmt.setInt(2, notificationId);
 	    stmt.executeQuery();
