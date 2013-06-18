@@ -175,6 +175,6 @@ public class AddTeam extends JFrame{
     private JLabel Wprowadz2;
     private JTextField dodaj2;
     private JButton next2;
-    public Zgloszenie zgloszenie;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+    private Zgloszenie zgloszenie;
 }

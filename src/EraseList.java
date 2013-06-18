@@ -25,7 +25,8 @@ public class EraseList extends JFrame {
 
     private void zgloszeniaValueChanged(ListSelectionEvent e) {
         // TODO add your code here
-        int index = zgloszenia.getSelectedIndex();
+        Object index = zgloszenia.getSelectedValue();
+        lista.removeElement(index);
         listaZgloszen.remove(index);
 
     }
@@ -35,6 +36,9 @@ public class EraseList extends JFrame {
         // Generated using JFormDesigner Evaluation license - mdz mdz
         scrollPane1 = new JScrollPane();
         zgloszenia = new JList();
+
+
+
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -56,6 +60,12 @@ public class EraseList extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+        zgloszenia.setModel(lista);
+
+        for(int i = 0; i <= listaZgloszen.size()-1; ++i){
+            lista.addElement(listaZgloszen.get(i));
+
+        }
         this.setSize(600,400);
         this.add(scrollPane1);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -64,8 +74,11 @@ public class EraseList extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - mdz mdz
+
     private JScrollPane scrollPane1;
     private JList zgloszenia;
-    private ArrayList<String> listaZgloszen = new ArrayList<String>();
+
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+    private ArrayList<String> listaZgloszen = new ArrayList<String>();
+    DefaultListModel lista = new DefaultListModel();
 }

@@ -13,6 +13,8 @@ public class MainMenu extends JFrame implements ActionListener {
     private  JMenuBar menuBar;
     private  JMenuItem menuItem2;
     private  JMenuItem menuItem3;
+    private JMenuItem menuItem4;
+    private JMenuItem menuItem5;
 
     void createMenuComponents() {
         menuBar = new JMenuBar();
@@ -34,10 +36,10 @@ public class MainMenu extends JFrame implements ActionListener {
         menu.add(menuItem2);
         menuItem3 = new JMenuItem("Usunięcie");
         menu.add(menuItem3);
-        menuItem = new JMenuItem("Przydzielenie zespołu serwisowego");
-        menu.add(menuItem);
-        menuItem = new JMenuItem("Wyszukanie informacji o gwarancji");
-        menu.add(menuItem);
+        menuItem4 = new JMenuItem("Przydzielenie zespołu serwisowego");
+        menu.add(menuItem4);
+        menuItem5 = new JMenuItem("Wyszukanie informacji o gwarancji");
+        menu.add(menuItem5);
         menuBar.add(menu);
 
         menu = new JMenu("Typy " +
@@ -71,6 +73,8 @@ public class MainMenu extends JFrame implements ActionListener {
 
         menuItem2.addActionListener(this);
         menuItem3.addActionListener(this);
+        menuItem4.addActionListener(this);
+        menuItem5.addActionListener(this);
     }
 
     public MainMenu() {
@@ -90,6 +94,18 @@ public class MainMenu extends JFrame implements ActionListener {
         }
         if (source == menuItem3) {
             EraseList menu = new EraseList();
+
+            menu.setVisible(true);
+            this.dispose();
+        }
+        if (source == menuItem4) {
+            AttachTeam menu = new AttachTeam();
+
+            menu.setVisible(true);
+            this.dispose();
+        }
+        if (source == menuItem5) {
+            ShowWarant menu = new ShowWarant();
 
             menu.setVisible(true);
             this.dispose();
