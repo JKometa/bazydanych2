@@ -201,15 +201,17 @@ public class DataAccessObject {
         return teams;
     }
     
-    public int addNotification(int deviceId, int teamId, String status, String opis) {
+    public int addNotification(int deviceId, int teamId, int adminId, String status, String opis) {
 	ResultSet rset;
         try {
+            /*
             stmt = conn.prepareStatement("SELECT IdAdministratora FROM Administrator WHERE Administrator.AdresSieci=Siec.AdresSieci AND"+
                     "Siec.IdSprzetu=?");
             stmt.setInt(1, deviceId);
 	    rset = stmt.executeQuery();
             rset.next();
-            int adminId = Integer.parseInt(rset.getObject("IdAdministratora").toString());
+            int adminId = Integer.parseInt(rset.getObject("IdAdministratora").toString());*/
+            
             stmt = conn.prepareStatement("INSERT (IdZagloszenia, IdSprzetu, IdZespolu, IdAdministratora, Status, Opis) INTO "
                     +"\"Zgłoszenie naprawy\" VALUES (id_notif_seq.NEXTVAL, ?, ?, ?, ?, ?)");
             stmt.setInt(1, deviceId);
