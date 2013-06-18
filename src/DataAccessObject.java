@@ -13,12 +13,12 @@ public class DataAccessObject {
     private static PreparedStatement stmt =null;
     private boolean isAdmin = false;
     private int id;
-    
+    /*
     public static void main(String[] args) {
         //DataAccessObject dao = new DataAccessObject();
         //DataAccessObject.connect(null, null);
         //DataAccessObject.disconnect();
-    }
+    }*/
     
     public static void connect(String userName, String password) {
 	try {
@@ -200,7 +200,7 @@ public class DataAccessObject {
         return 0;
     }
     
-    public void deleteNotifications(int id) {
+    public int deleteNotifications(int id) {
 	try {
 	    stmt = conn.prepareStatement("DELETE FROM `Zgloszenia napraw` WHERE IdZgloszenia=?");
 	    stmt.setInt(1, id);
@@ -208,7 +208,9 @@ public class DataAccessObject {
 	}
 	catch(SQLException e) {
 	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+            return -1;
 	}
+        return 0;
     }
     
     public int changeTeamNotification(int notificationId, int teamId) {
@@ -220,7 +222,7 @@ public class DataAccessObject {
 	}
 	catch(SQLException e) {
 	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
-            return 1;
+            return -1;
 	}
         return 0;
     }
