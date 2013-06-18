@@ -15,9 +15,9 @@ public class DataAccessObject {
     private int id;
     
     public static void main(String[] args) {
-        DataAccessObject dao = new DataAccessObject();
-        DataAccessObject.connect(null, null);
-        DataAccessObject.disconnect();
+        //DataAccessObject dao = new DataAccessObject();
+        //DataAccessObject.connect(null, null);
+        //DataAccessObject.disconnect();
     }
     
     public static void connect(String userName, String password) {
@@ -105,7 +105,7 @@ public class DataAccessObject {
         DataAccessObject.Notification n;
 	ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM `Zgloszenia napraw` WHERE IdAdministratora=?");
+	    stmt = conn.prepareStatement("SELECT * FROM `Zgloszenie` WHERE IdAdministratora=?");
 	    stmt.setInt(1, adminId);
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
@@ -159,7 +159,7 @@ public class DataAccessObject {
         DataAccessObject.Team n;
 	ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM `Zespol serwisowy`");
+	    stmt = conn.prepareStatement("SELECT * FROM `Zespol`");
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
                 n = new DataAccessObject.Team();

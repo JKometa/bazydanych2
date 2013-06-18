@@ -56,7 +56,7 @@ public class DataAccessObject {
     }
     
     public LinkedList<DataAccessObject.Device> getDevices() {
-        LinkedList<DataAccessObject.Device> devices = new LinkedList<>();
+        LinkedList<DataAccessObject.Device> devices = new LinkedList<DataAccessObject.Device>();
         DataAccessObject.Device n;
 	ResultSet rset;
 	try {
@@ -109,7 +109,7 @@ public class DataAccessObject {
     }
     
     public LinkedList<DataAccessObject.Notification> getNotifications(int adminId) {
-        LinkedList<DataAccessObject.Notification> notifs = new LinkedList<>();
+        LinkedList<DataAccessObject.Notification> notifs = new LinkedList<DataAccessObject.Notification>();
         DataAccessObject.Notification n;
 	ResultSet rset;
 	try {
@@ -136,7 +136,7 @@ public class DataAccessObject {
     }
     
     public LinkedList<DataAccessObject.Worker> getWorkers() {
-        LinkedList<DataAccessObject.Worker> workers = new LinkedList<>();
+        LinkedList<DataAccessObject.Worker> workers = new LinkedList<DataAccessObject.Worker>();
         DataAccessObject.Worker n;
 	ResultSet rset;
 	try {
@@ -163,7 +163,7 @@ public class DataAccessObject {
     }
     
     public LinkedList<DataAccessObject.Team> getTeams() {
-        LinkedList<DataAccessObject.Team> teams = new LinkedList<>();
+        LinkedList<DataAccessObject.Team> teams = new LinkedList<DataAccessObject.Team>();
         DataAccessObject.Team n;
 	ResultSet rset;
 	try {

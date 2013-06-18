@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 /*
  * Created by JFormDesigner on Tue Jun 18 11:45:07 CEST 2013
  */
@@ -13,18 +14,33 @@ import java.util.ArrayList;
  * @author mdz mdz
  */
 public class AttachTeam extends JFrame {
+
+    private DataAccessObject dao = new DataAccessObject();
+
     public AttachTeam() {
-        zgloszeniaLista.add("Pierwsze");
-        zgloszeniaLista.add("Drugie");
-        zgloszeniaLista.add("Trzecie");
-        zgloszeniaLista.add("Czwarte");
-        zgloszeniaLista.add("Piate");
-        zespolyLista.add("Pierwsze");
-        zespolyLista.add("Drugie");
-        zespolyLista.add("Trzecie");
-        zespolyLista.add("Czwarte");
-        zespolyLista.add("Piate");
+        fillZgloszeniaLista();
+        fillZespolLista();
         initComponents();
+    }
+
+    private void fillZgloszeniaLista() {
+        DataAccessObject.connect(null,null);
+        //TODO zmiana idika admina
+        LinkedList<DataAccessObject.Notification> notifications = dao.getNotifications(1);
+        for(DataAccessObject.Notification n: notifications) {
+            listaZgloszenia.addElement(""+n.id);
+        }
+        DataAccessObject.disconnect();
+
+    }
+
+    private void fillZespolLista() {
+        DataAccessObject.connect(null,null);
+        LinkedList<DataAccessObject.Team> teams = dao.getTeams();
+        for (DataAccessObject.Team t: teams) {
+            listaZespoly.addElement(""+t.name);
+        }
+        DataAccessObject.disconnect();
     }
 
     private void zatwierdzActionPerformed(ActionEvent e) {

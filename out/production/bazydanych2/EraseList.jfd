@@ -1,0 +1,45 @@
+JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_17" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "0:1.0, 0, 0"
+			"$rowSpecs": "0:1.0, 0, 0"
+			"$alignTop": true
+			"$alignLeft": true
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "zgloszenia"
+					addEvent( new FormEvent( "javax.swing.event.ListSelectionListener", "valueChanged", "zgloszeniaValueChanged", true ) )
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridwidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "usun"
+				"text": "Usun"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "usunActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 1
+				"gridwidth": 2
+				"gridx": 1
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "zakoncz"
+				"text": "Zakoncz"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "zakonczActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 2
+				"gridx": 1
+				"gridwidth": 2
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 95, 25 )
+			"size": new java.awt.Dimension( 415, 300 )
+		} )
+	}
+}
