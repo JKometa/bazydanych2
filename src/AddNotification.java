@@ -24,8 +24,12 @@ public class AddNotification extends JFrame {
     }
 
     private void zatwierdzActionPerformed(ActionEvent e) {
-        if(!gwarant.getText().equals("") && !idSprzet.getText().equals("") && !idLokalizacji.getText().equals("")){
+        if(!opis.getText().equals("") && !idSprzet.getText().equals("")){
             // TODO DODAJ MNIE TUTAJ NOWE ZGLOSZENIE  A POTEM ODKOMENTUJ   TO CO TAM JEST ZAKOMENTOWANE
+
+            //opis.getText()   DA CI STRINGA OPISU
+            //Integer.parseInt(idSprzet.getText())   DA CI ID SPRZETU
+            //STATUS ZAWSZE BEDZIE USTAWIONE NA NOWE
 
 
 
@@ -45,12 +49,10 @@ public class AddNotification extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - mdz mdz
         label1 = new JLabel();
-        gwarant = new JTextField();
+        opis = new JTextField();
         label2 = new JLabel();
         idSprzet = new JTextField();
         label3 = new JLabel();
-        idLokalizacji = new JTextField();
-        label4 = new JLabel();
         status = new JComboBox();
         label5 = new JLabel();
         cofnij = new JButton();
@@ -60,25 +62,32 @@ public class AddNotification extends JFrame {
         setTitle("Dodanie zg\u0142oszenia");
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
-        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {91, 0, 0};
-        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {31, 0, 0, 0, 0, 0, 0};
+        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {166, 0, 0};
+        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {31, 97, 0, 0, 0, 0};
         ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
-        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
         //---- label1 ----
         label1.setText("Wprowad\u017a dane zg\u0142oszenia:");
         contentPane.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        contentPane.add(gwarant, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+
+        //---- opis ----
+        opis.setToolTipText("Wype\u0142nij opis");
+        opis.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+        contentPane.add(opis, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
         //---- label2 ----
-        label2.setText("Nazwa gwaranta");
+        label2.setText("Opis");
         contentPane.add(label2, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
+
+        //---- idSprzet ----
+        idSprzet.setToolTipText("Podaj ID");
         contentPane.add(idSprzet, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
@@ -88,22 +97,13 @@ public class AddNotification extends JFrame {
         contentPane.add(label3, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
-        contentPane.add(idLokalizacji, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 5, 5), 0, 0));
-
-        //---- label4 ----
-        label4.setText("Id lokalizacji");
-        contentPane.add(label4, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 5, 0), 0, 0));
-        contentPane.add(status, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
+        contentPane.add(status, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
         //---- label5 ----
         label5.setText("Status");
-        contentPane.add(label5, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+        contentPane.add(label5, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
@@ -115,7 +115,7 @@ public class AddNotification extends JFrame {
                 cofnijActionPerformed(e);
             }
         });
-        contentPane.add(cofnij, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
+        contentPane.add(cofnij, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
             GridBagConstraints.WEST, GridBagConstraints.VERTICAL,
             new Insets(0, 0, 0, 5), 0, 0));
 
@@ -127,7 +127,7 @@ public class AddNotification extends JFrame {
                 zatwierdzActionPerformed(e);
             }
         });
-        contentPane.add(zatwierdz, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
+        contentPane.add(zatwierdz, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
         pack();
@@ -143,9 +143,7 @@ public class AddNotification extends JFrame {
             }
         });
         filter1.setNegativeAccepted(true);
-        filter2.setNegativeAccepted(true);
-        idLokalizacji.setDocument(filter1);
-        idSprzet.setDocument(filter2);
+        idSprzet.setDocument(filter1);
 
 
     }
@@ -153,18 +151,15 @@ public class AddNotification extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - mdz mdz
     private JLabel label1;
-    private JTextField gwarant;
+    private JTextField opis;
     private JLabel label2;
     private JTextField idSprzet;
     private JLabel label3;
-    private JTextField idLokalizacji;
-    private JLabel label4;
     private JComboBox status;
     private JLabel label5;
     private JButton cofnij;
     private JButton zatwierdz;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     JTextFieldFilter filter1 = new JTextFieldFilter(JTextFieldFilter.NUMERIC);
-    JTextFieldFilter filter2 = new JTextFieldFilter(JTextFieldFilter.NUMERIC);
 
 }
