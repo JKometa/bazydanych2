@@ -33,6 +33,15 @@ public class AttachTeam extends JFrame {
         Object attachZgloszenie = zgloszenia.getSelectedValue();
 
 
+        ClientAplication.mainMenu.setVisible(true);
+        this.dispose();
+
+
+    }
+
+    private void cofnijActionPerformed(ActionEvent e) {
+        ClientAplication.mainMenu.setVisible(true);
+        this.dispose();
     }
 
     private void initComponents() {
@@ -42,6 +51,7 @@ public class AttachTeam extends JFrame {
         zgloszenia = new JList();
         scrollPane2 = new JScrollPane();
         zespoly = new JList();
+        cofnij = new JButton();
         zatwierdz = new JButton();
 
         //======== this ========
@@ -65,6 +75,18 @@ public class AttachTeam extends JFrame {
             scrollPane2.setViewportView(zespoly);
         }
         contentPane.add(scrollPane2, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 0), 0, 0));
+
+        //---- cofnij ----
+        cofnij.setText("Cofnij");
+        cofnij.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cofnijActionPerformed(e);
+            }
+        });
+        contentPane.add(cofnij, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
 
@@ -105,6 +127,7 @@ public class AttachTeam extends JFrame {
     private JList zgloszenia;
     private JScrollPane scrollPane2;
     private JList zespoly;
+    private JButton cofnij;
     private JButton zatwierdz;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     DefaultListModel listaZgloszenia = new DefaultListModel();

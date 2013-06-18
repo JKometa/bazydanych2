@@ -7,7 +7,7 @@ new FormModel {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "0:1.0"
-				"$rowSpecs": "0:1.0"
+				"$rowSpecs": "0:1.0, 0"
 				"$alignTop": true
 				"$alignLeft": true
 			} ) {
@@ -19,19 +19,33 @@ new FormModel {
 						addEvent( new FormEvent( "javax.swing.event.ListSelectionListener", "valueChanged", "urzadzeniaValueChanged", true ) )
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "cofnij"
+					"text": "Cofnij"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cofnijActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 1
+				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "card1"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "0:1.0"
-				"$rowSpecs": "0:1.0"
+				"$rowSpecs": "0:1.0, 0"
 				"$alignTop": true
 				"$alignLeft": true
 			} ) {
 				name: "panel2"
-				add( new FormComponent( "javax.swing.JTextArea" ) {
+				add( new FormComponent( "javax.swing.JTextPane" ) {
 					name: "gwarant"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "zakoncz"
+					"text": "Zakoncz"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "zakonczActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 1
+				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "card2"
 			} )

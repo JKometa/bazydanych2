@@ -18,15 +18,20 @@ public class AddTeam extends JFrame{
 
     private void nextActionPerformed(ActionEvent e) {
         // TODO add your code here
-        if(idSprzetu.getText() != null && idAdministratora.getText() != null && idLokalizacji.getText() != null && NazwaGwaranta.getText() != null){
+        if(!idSprzetu.getText().equals("")  && !idAdministratora.getText().equals("")  && !idLokalizacji.getText().equals("")  && !NazwaGwaranta.getText().equals("") ){
             //Rob costam
             zgloszenie = new Zgloszenie(-1, Integer.parseInt(idSprzetu.getText()), Integer.parseInt(idLokalizacji.getText()), Integer.parseInt(idAdministratora.getText()), NazwaGwaranta.getText());
-            panel2.setVisible(true);
-            panel1.setVisible(false);
+            ClientAplication.mainMenu.setVisible(true);
+            this.dispose();
         }
         else{
             //wypelnij pole tektowe bo nie pojde dalej :(
         }
+    }
+
+    private void cofnijActionPerformed(ActionEvent e) {
+        ClientAplication.mainMenu.setVisible(true);
+        this.dispose();
     }
 
     private void initComponents() {
@@ -47,6 +52,7 @@ public class AddTeam extends JFrame{
         panel2 = new JPanel();
         Wprowadz2 = new JLabel();
         dodaj2 = new JTextField();
+        cofnij = new JButton();
         next2 = new JButton();
 
         //======== dodawanie ========
@@ -143,6 +149,18 @@ public class AddTeam extends JFrame{
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 0), 0, 0));
 
+                //---- cofnij ----
+                cofnij.setText("Cofnij");
+                cofnij.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cofnijActionPerformed(e);
+                    }
+                });
+                panel2.add(cofnij, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 0, 5), 0, 0));
+
                 //---- next2 ----
                 next2.setText("next");
                 panel2.add(next2, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
@@ -174,6 +192,7 @@ public class AddTeam extends JFrame{
     private JPanel panel2;
     private JLabel Wprowadz2;
     private JTextField dodaj2;
+    private JButton cofnij;
     private JButton next2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     private Zgloszenie zgloszenie;

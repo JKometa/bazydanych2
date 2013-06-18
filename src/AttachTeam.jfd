@@ -25,6 +25,13 @@ new FormModel {
 				"gridx": 1
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "cofnij"
+				"text": "Cofnij"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cofnijActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 1
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "zatwierdz"
 				"text": "zatwierdz"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "zatwierdzActionPerformed", true ) )

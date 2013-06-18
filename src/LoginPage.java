@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -38,8 +37,7 @@ public class LoginPage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == loginButton) {
-           MainMenu menu = new MainMenu();
-           menu.setVisible(true);
+           ClientAplication.mainMenu.setVisible(true);
            this.dispose();
         }
         if (source == exitButton) {
