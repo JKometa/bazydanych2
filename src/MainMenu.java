@@ -17,6 +17,7 @@ public class MainMenu extends JFrame implements ActionListener {
     private JMenuItem menuItem5;
 
     void createMenuComponents() {
+        if(LoginPage.hasAccess){
         menuBar = new JMenuBar();
         JMenu menu = new JMenu("Ewidencja " +
                "urządzeń");
@@ -75,6 +76,32 @@ public class MainMenu extends JFrame implements ActionListener {
         menuItem3.addActionListener(this);
         menuItem4.addActionListener(this);
         menuItem5.addActionListener(this);
+        }
+        else{
+            menuBar = new JMenuBar();
+            JMenu menu = new JMenu("Ewidencja " +
+                    "urządzeń");
+            menuBar.add(menu);
+
+            menu = new JMenu("Zgłoszenia " +
+                    "napraw");
+            menuItem5 = new JMenuItem("Wyszukanie informacji o gwarancji");
+            menu.add(menuItem5);
+            menuBar.add(menu);
+
+            menu = new JMenu("Typy " +
+                    "urządzeń");
+            menuBar.add(menu);
+
+            menu = new JMenu("Zespoły " +
+                    "serwisowe");
+            menuBar.add(menu);
+
+            menu = new JMenu("Lokalizacja");
+            menuBar.add(menu);
+
+            menuItem5.addActionListener(this);
+        }
     }
 
     public MainMenu() {

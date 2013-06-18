@@ -6,10 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 public class ClientAplication {
-    static MainMenu mainMenu = new MainMenu();
+
 
     public static void main(final String[] args) {
-       mainMenu.setVisible(false);
+
        LoginPage loginFrame = new LoginPage();
        loginFrame.setVisible(true);
        return;

@@ -19,15 +19,19 @@ public class LoginPage extends JFrame implements ActionListener {
     private JButton loginButton;
     private JButton exitButton;
     private JPasswordField passwordText;
+    static MainMenu mainMenu;
+    public static boolean hasAccess;
 
     private DataAccessObject dao = new DataAccessObject();
 
     private void createUIComponents() {
+
         loginButton.addActionListener(this);
         exitButton.addActionListener(this);
     }
 
     public LoginPage() {
+        hasAccess = false;
         this.createUIComponents();
         this.add(loginPanel);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -45,7 +49,11 @@ public class LoginPage extends JFrame implements ActionListener {
                JOptionPane.showMessageDialog(this,"Niepoprawna nazwa uzytkownika. Prosze sprobowac ponownie");
 
            } else {
-                ClientAplication.mainMenu.setVisible(true);
+                System.out.print(userData.hasAccess);
+                if(userData.hasAccess == 1)
+                    hasAccess = true;
+                mainMenu = new MainMenu();
+                mainMenu.setVisible(true);
                 this.dispose();
            }
         }

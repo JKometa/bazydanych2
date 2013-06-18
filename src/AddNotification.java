@@ -22,7 +22,7 @@ public class AddNotification extends JFrame {
     }
 
     private void cofnijActionPerformed(ActionEvent e) {
-        ClientAplication.mainMenu.setVisible(true);
+        LoginPage.mainMenu.setVisible(true);
         this.dispose();
     }
 

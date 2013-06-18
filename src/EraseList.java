@@ -55,7 +55,7 @@ public class EraseList extends JFrame {
     }
 
     private void zakonczActionPerformed(ActionEvent e) {
-        ClientAplication.mainMenu.setVisible(true);
+        LoginPage.mainMenu.setVisible(true);
         this.dispose();
     }
 
@@ -76,9 +76,12 @@ public class EraseList extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - mdz mdz
         label1 = new JLabel();
+        label2 = new JLabel();
         panel1 = new JPanel();
         scrollPane1 = new JScrollPane();
         zgloszenia = new JList();
+        scrollPane2 = new JScrollPane();
+        szczegolyZgloszenia = new JTextArea();
         usun = new JButton();
         zakoncz = new JButton();
 
@@ -86,7 +89,7 @@ public class EraseList extends JFrame {
         setTitle("Usuwanie zg\u0142oszenia");
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
-        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {150, 0, 0};
+        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {150, 190, 0};
         ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0};
         ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
         ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0, 0.0, 0.0, 1.0E-4};
@@ -94,6 +97,12 @@ public class EraseList extends JFrame {
         //---- label1 ----
         label1.setText("Lista zg\u0142osze\u0144:");
         contentPane.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.VERTICAL,
+            new Insets(0, 0, 0, 0), 0, 0));
+
+        //---- label2 ----
+        label2.setText("Sczeg\u00f3\u0142y zg\u0142oszenia:");
+        contentPane.add(label2, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.VERTICAL,
             new Insets(0, 0, 0, 0), 0, 0));
 
@@ -125,7 +134,15 @@ public class EraseList extends JFrame {
             });
             scrollPane1.setViewportView(zgloszenia);
         }
-        contentPane.add(scrollPane1, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
+        contentPane.add(scrollPane1, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 0), 0, 0));
+
+        //======== scrollPane2 ========
+        {
+            scrollPane2.setViewportView(szczegolyZgloszenia);
+        }
+        contentPane.add(scrollPane2, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
 
@@ -168,9 +185,12 @@ public class EraseList extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - mdz mdz
     private JLabel label1;
+    private JLabel label2;
     private JPanel panel1;
     private JScrollPane scrollPane1;
     private JList zgloszenia;
+    private JScrollPane scrollPane2;
+    private JTextArea szczegolyZgloszenia;
     private JButton usun;
     private JButton zakoncz;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

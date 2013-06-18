@@ -51,7 +51,7 @@ public class AttachTeam extends JFrame {
 
         this.changeTeamNotifiaction(teams.get(attachIndex),notifications.get(zgloszenieIndex));
 
-        ClientAplication.mainMenu.setVisible(true);
+        LoginPage.mainMenu.setVisible(true);
         this.dispose();
 
 
@@ -66,7 +66,7 @@ public class AttachTeam extends JFrame {
     }
 
     private void cofnijActionPerformed(ActionEvent e) {
-        ClientAplication.mainMenu.setVisible(true);
+        LoginPage.mainMenu.setVisible(true);
         this.dispose();
     }
 

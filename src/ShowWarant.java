@@ -35,7 +35,7 @@ public class ShowWarant extends JFrame {
     }
 
     private void button1ActionPerformed(ActionEvent e) {
-        ClientAplication.mainMenu.setVisible(true);
+        LoginPage.mainMenu.setVisible(true);
         this.dispose();
     }
 
