@@ -27,6 +27,8 @@ public class DataAccessObject {
             System.out.println("Trying to connect...");
             Class.forName("com.mysql.jdbc.Driver");//.newInstance();
             conn = DriverManager.getConnection("jdbc:mysql://jatokor.net:3306/bd", "bd2.elka", "admin1");
+            conn.setAutoCommit(false);
+            conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             System.out.println("Connected to db.");
 	}
 	catch(SQLException e) {
@@ -75,11 +77,11 @@ public class DataAccessObject {
     
     public DataAccessObject.Warranty getWarranty(int deviceId) {
         DataAccessObject.Warranty n = new DataAccessObject.Warranty();
-	ResultSet rset;
+	    ResultSet rset;
 	try {
 	    stmt = conn.prepareStatement("SELECT A.IdGwarancji, A.NazwaGwaranta, A.PoczatekGwarancji, A.KoniecGwarancji,"+
                     "A.NumerUmowy, B.Ulica, B.Miasto, B.NrTelefonu FROM Gwarancja A, Gwarant B, `WlasciwosciUzytkowe` C "+
-                    "WHERE A.NazwaGwaranta=B.NazwaGwaranta AND C.IdGwarancji=A.IdGwarancji AND C.IdSprzetu=?");
+                    "WHERE A.NazwaGwaranta=B.NazwaGwaranta AND C.IdGwarancji=A.IdGwarancji AND C.IdEgz=?");
 	    stmt.setInt(1, deviceId);
 	    rset = stmt.executeQuery();
 	    rset.next();
@@ -105,9 +107,9 @@ public class DataAccessObject {
     public LinkedList<DataAccessObject.Notification> getNotifications(int adminId) {
         LinkedList<DataAccessObject.Notification> notifs = new LinkedList<DataAccessObject.Notification>();
         DataAccessObject.Notification n;
-	ResultSet rset;
+	    ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM `Zgloszenie` WHERE IdAdministratora=?");
+	    stmt = conn.prepareStatement("SELECT * FROM Zgloszenie WHERE IdAdministratora=?");
 	    stmt.setInt(1, adminId);
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
@@ -122,20 +124,22 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
 	}
 	catch(NullPointerException e2) {
-	    //System.out.println("Nuull");
+	    System.out.println("Nuull");
+        e2.printStackTrace();
 	}
         return notifs;
     }
     
-    public Worker getWorker(int id) {
+    public Worker getWorker(String login, String password) {
         DataAccessObject.Worker n = null;
-	ResultSet rset;
+	    ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM Pracownik WHERE IdPracownika=?");
-	    stmt.setInt(1, id);
+	    stmt = conn.prepareStatement("SELECT * FROM Pracownik WHERE Login=? AND Haslo=?");
+	    stmt.setString(1, login);
+        stmt.setString(2,password);
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
                 n = new DataAccessObject.Worker();
@@ -148,7 +152,8 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+        return n;
 	}
 	catch(NullPointerException e2) {
 	}
@@ -158,7 +163,7 @@ public class DataAccessObject {
     public LinkedList<DataAccessObject.Worker> getWorkers() {
         LinkedList<DataAccessObject.Worker> workers = new LinkedList<DataAccessObject.Worker>();
         DataAccessObject.Worker n;
-	ResultSet rset;
+	    ResultSet rset;
 	try {
 	    stmt = conn.prepareStatement("SELECT * FROM Pracownik");
 	    rset = stmt.executeQuery();
@@ -168,8 +173,10 @@ public class DataAccessObject {
 		n.name = rset.getObject("Imie").toString();
 		n.surname = rset.getObject("Nazwisko").toString();
 		n.status = rset.getObject("Status").toString();
-                n.teamId = Integer.parseInt(rset.getObject("IdZespolu").toString());
-                workers.add(n);
+        n.login = rset.getObject("Login").toString();
+        n.password = rset.getObject("Haslo").toString();
+        n.teamId = Integer.parseInt(rset.getObject("IdZespolu").toString());
+        workers.add(n);
 	    }
 	    rset.close();
 	}
@@ -209,24 +216,24 @@ public class DataAccessObject {
     
     public int addNotification(int deviceId, int teamId, int adminId, String status, String opis) {  	ResultSet rset;
         try {
-            /*
-            stmt = conn.prepareStatement("SELECT IdAdministratora FROM Administrator WHERE Administrator.AdresSieci=Siec.AdresSieci AND"+
-                    "Siec.IdSprzetu=?");
-            stmt.setInt(1, deviceId);
-	    rset = stmt.executeQuery();
-            rset.next();
-            int adminId = Integer.parseInt(rset.getObject("IdAdministratora").toString());*/
-            
-            stmt = conn.prepareStatement("INSERT (IdZagloszenia, IdSprzetu, IdZespolu, IdAdministratora, Status, Opis) INTO "
-                    +"\"Zgłoszenie naprawy\" VALUES (id_notif_seq.NEXTVAL, ?, ?, ?, ?, ?)");
+
+            stmt.executeQuery();
+            stmt = conn.prepareStatement("INSERT ( IdSprzetu, IdZespolu, IdAdministratora, Status, Opis) INTO "
+                    +"\"Zgłoszenie naprawy\" VALUES ( ?, ?, ?, ?, ?)");
             stmt.setInt(1, deviceId);
             stmt.setInt(2, teamId);
             stmt.setInt(3, adminId);
             stmt.setString(4, status);
             stmt.setString(5, opis);
-            stmt.executeQuery();
+            stmt.executeUpdate();
+            conn.commit();
         }
         catch(SQLException e) {
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             return -1;
         }
         return 0;
@@ -237,9 +244,16 @@ public class DataAccessObject {
 	    stmt = conn.prepareStatement("DELETE FROM `Zgloszenie` WHERE IdZgloszenia=?");
 	    stmt.setInt(1, id);
 	    stmt.executeUpdate();
+        conn.commit();
 	}
 	catch(SQLException e) {
-	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+        try {
+            conn.rollback();
+        } catch (SQLException e1) {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+        return 1;
 	}
         return 0;
     }
@@ -250,10 +264,16 @@ public class DataAccessObject {
 	    stmt.setInt(1, teamId);
 	    stmt.setInt(2, notificationId);
 	    stmt.executeUpdate();
+        conn.commit();
 	}
 	catch(SQLException e) {
 	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
-            return 1;
+        try {
+            conn.rollback();
+        } catch (SQLException e1) {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return 1;
 	}
         return 0;
     }
@@ -286,6 +306,8 @@ public class DataAccessObject {
         public int id;
         public String name;
         public String surname;
+        public String login;
+        public String password;
         public int teamId;
         public String status;
     }
