@@ -31,11 +31,7 @@ public class DataAccessObject {
 	    System.out.println(e.getMessage() + "-> SQLException");
 	} catch(ClassNotFoundException e) {
 	    System.out.println(e.getMessage() + "-> class not found");
-	} /*catch (InstantiationException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+	}
     }
     
     public static void disconnect() {
@@ -114,6 +110,7 @@ public class DataAccessObject {
                 n.id = Integer.parseInt(rset.getObject("IdZgloszenia").toString());
 		n.device = Integer.parseInt(rset.getObject("IdSprzetu").toString());
                 n.team = Integer.parseInt(rset.getObject("IdZespolu").toString());
+                n.opis = rset.getObject("Opis").toString();
                 notifs.add(n);
 	    }
 	    rset.close();
@@ -179,7 +176,7 @@ public class DataAccessObject {
         return teams;
     }
     
-    public int addNotification(int deviceId, int teamId, String status) {
+    public int addNotification(int deviceId, int teamId, String status, String opis) {
 	ResultSet rset;
         try {
             stmt = conn.prepareStatement("SELECT IdAdministratora FROM Administrator WHERE Administrator.AdresSieci=Siec.AdresSieci AND"+
@@ -188,12 +185,13 @@ public class DataAccessObject {
 	    rset = stmt.executeQuery();
             rset.next();
             int adminId = Integer.parseInt(rset.getObject("IdAdministratora").toString());
-            stmt = conn.prepareStatement("INSERT (IdZagloszenia, IdSprzetu, IdZespolu, IdAdministratora, Status) INTO "
-                    +"\"Zgłoszenie naprawy\" VALUES (id_notif_seq.NEXTVAL, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT (IdZagloszenia, IdSprzetu, IdZespolu, IdAdministratora, Status, Opis) INTO "
+                    +"\"Zgłoszenie naprawy\" VALUES (id_notif_seq.NEXTVAL, ?, ?, ?, ?, ?)");
             stmt.setInt(1, deviceId);
             stmt.setInt(2, teamId);
             stmt.setInt(3, adminId);
             stmt.setString(4, status);
+            stmt.setString(5, opis);
             stmt.executeQuery();
         }
         catch(SQLException e) {
@@ -232,6 +230,7 @@ public class DataAccessObject {
         public int device;
         public int team;
         public int admin;
+        public String opis;
     }
     
     class Device {
