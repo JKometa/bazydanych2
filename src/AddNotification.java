@@ -41,6 +41,7 @@ public class AddNotification extends JFrame {
                     "Proszę wypełnić wszystkie pola!",
                     "Błąd danych",
                     JOptionPane.WARNING_MESSAGE);
+
         }
 
     }
@@ -81,7 +82,7 @@ public class AddNotification extends JFrame {
             new Insets(0, 0, 5, 5), 0, 0));
 
         //---- label2 ----
-        label2.setText("Opis");
+        label2.setText("Opis ");
         contentPane.add(label2, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
