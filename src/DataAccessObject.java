@@ -124,6 +124,31 @@ public class DataAccessObject {
         return notifs;
     }
     
+    public Worker getWorker(int id) {
+        DataAccessObject.Worker n = null;
+	ResultSet rset;
+	try {
+	    stmt = conn.prepareStatement("SELECT * FROM Pracownik WHERE IdPracownika=?");
+	    stmt.setInt(1, id);
+	    rset = stmt.executeQuery();
+	    while(rset.next()) {
+                n = new DataAccessObject.Worker();
+                n.id = Integer.parseInt(rset.getObject("IdPracownika").toString());
+		n.name = rset.getObject("Imie").toString();
+		n.surname = rset.getObject("Nazwisko").toString();
+		n.status = rset.getObject("Status").toString();
+                n.teamId = Integer.parseInt(rset.getObject("IdZespolu").toString());
+	    }
+	    rset.close();
+	}
+	catch(SQLException e) {
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	}
+	catch(NullPointerException e2) {
+	}
+        return n;
+    }
+    
     public LinkedList<DataAccessObject.Worker> getWorkers() {
         LinkedList<DataAccessObject.Worker> workers = new LinkedList<DataAccessObject.Worker>();
         DataAccessObject.Worker n;
