@@ -73,6 +73,8 @@ public class AttachTeam extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - mdz mdz
+        label1 = new JLabel();
+        label2 = new JLabel();
         scrollPane1 = new JScrollPane();
         zgloszenia = new JList();
         scrollPane2 = new JScrollPane();
@@ -81,18 +83,31 @@ public class AttachTeam extends JFrame {
         zatwierdz = new JButton();
 
         //======== this ========
+        setTitle("Przydzielenie zespo\u0142u serwisowego");
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
         ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {71, 0, 0};
-        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {257, 0, 0};
+        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {0, 257, 0, 0};
         ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0E-4};
-        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0E-4};
+        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 1.0, 1.0, 1.0E-4};
+
+        //---- label1 ----
+        label1.setText("Lista zg\u0142osze\u0144:");
+        contentPane.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 0), 0, 0));
+
+        //---- label2 ----
+        label2.setText("Lista zespo\u0142\u00f3w:");
+        contentPane.add(label2, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 0), 0, 0));
 
         //======== scrollPane1 ========
         {
             scrollPane1.setViewportView(zgloszenia);
         }
-        contentPane.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+        contentPane.add(scrollPane1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
 
@@ -100,7 +115,7 @@ public class AttachTeam extends JFrame {
         {
             scrollPane2.setViewportView(zespoly);
         }
-        contentPane.add(scrollPane2, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+        contentPane.add(scrollPane2, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
 
@@ -112,8 +127,8 @@ public class AttachTeam extends JFrame {
                 cofnijActionPerformed(e);
             }
         });
-        contentPane.add(cofnij, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+        contentPane.add(cofnij, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+            GridBagConstraints.WEST, GridBagConstraints.VERTICAL,
             new Insets(0, 0, 0, 0), 0, 0));
 
         //---- zatwierdz ----
@@ -124,7 +139,7 @@ public class AttachTeam extends JFrame {
                 zatwierdzActionPerformed(e);
             }
         });
-        contentPane.add(zatwierdz, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+        contentPane.add(zatwierdz, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
         pack();
@@ -140,15 +155,15 @@ public class AttachTeam extends JFrame {
             listaZespoly.addElement(zespolyLista.get(i));
 
         }
-        this.setSize(600,400);
-        this.add(scrollPane1);
-        this.add(scrollPane2);
+
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - mdz mdz
+    private JLabel label1;
+    private JLabel label2;
     private JScrollPane scrollPane1;
     private JList zgloszenia;
     private JScrollPane scrollPane2;

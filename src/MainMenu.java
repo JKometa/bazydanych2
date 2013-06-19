@@ -88,7 +88,7 @@ public class MainMenu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == menuItem2) {
-            AddTeam menu = new AddTeam();
+            AddNotification menu = new AddNotification();
 
             menu.setVisible(true);
             this.dispose();
