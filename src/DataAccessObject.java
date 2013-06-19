@@ -115,7 +115,7 @@ public class DataAccessObject {
         DataAccessObject.Notification n;
 	    ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM Zgloszenie WHERE IdAdministratora=?");
+	    stmt = conn.prepareStatement("SELECT * FROM Zgloszenie WHERE IdDodajacego=?");
 	    stmt.setInt(1, adminId);
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
@@ -156,8 +156,7 @@ public class DataAccessObject {
                 n.id = Integer.parseInt(rset.getObject("IdPracownika").toString());
 		        n.name = rset.getObject("Imie").toString();
 		        n.surname = rset.getObject("Nazwisko").toString();
-		        n.status = rset.getObject("Status").toString();
-                n.teamId = Integer.parseInt(rset.getObject("IdZespolu").toString());
+                n.hasAccess = Integer.parseInt(rset.getObject("HasAccess").toString());
 	    }
 	    rset.close();
 	}
@@ -224,15 +223,20 @@ public class DataAccessObject {
         return teams;
     }
     
-    public int addNotification(int deviceId, int teamId, int adminId, String status, String opis) {  	ResultSet rset;
+    public int addNotification(int deviceId, int workerId, String status, String opis) {
+        ResultSet rset;
         try {
 
-            stmt.executeQuery();
-            stmt = conn.prepareStatement("INSERT ( IdSprzetu, IdZespolu, IdAdministratora, Status, Opis) INTO "
-                    +"\"Zgłoszenie naprawy\" VALUES ( ?, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO Zgloszenie ( NazwaGwaranta, IdSprzetu, IdDodajacego, Status, Opis) "
+                    +"VALUES ( ( " +
+                        "SELECT NazwaGwaranta FROM Gwarancja WHERE IdGwarancji = (" +
+                            "SELECT IdGwarancji FROM WlasciwosciUzytkowe WHERE IdEgz = ?" +
+                            ")" +
+                        ")" +
+                    ",?, ?, ?, ?)");
             stmt.setInt(1, deviceId);
-            stmt.setInt(2, teamId);
-            stmt.setInt(3, adminId);
+            stmt.setInt(2, deviceId);
+            stmt.setInt(3, workerId);
             stmt.setString(4, status);
             stmt.setString(5, opis);
             stmt.executeUpdate();
@@ -320,6 +324,7 @@ public class DataAccessObject {
         public String password;
         public int teamId;
         public String status;
+        public int hasAccess;
     }
     
     class Team {

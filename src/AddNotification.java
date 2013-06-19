@@ -14,6 +14,9 @@ import java.awt.event.ItemListener;
  * @author mdz mdz
  */
 public class AddNotification extends JFrame {
+
+    DataAccessObject dao = new DataAccessObject();
+
     public AddNotification() {
         initComponents();
     }
@@ -23,10 +26,16 @@ public class AddNotification extends JFrame {
         this.dispose();
     }
 
+    private void addNotification() {
+        DataAccessObject.connect(null,null);
+        dao.addNotification(Integer.parseInt(idSprzet.getText()),1,"NOWE",opis.getText());
+        DataAccessObject.disconnect();
+    }
+
     private void zatwierdzActionPerformed(ActionEvent e) {
         if(!idSprzet.getText().equals("") ){
             // TODO DODAJ MNIE TUTAJ NOWE ZGLOSZENIE  A POTEM ODKOMENTUJ   TO CO TAM JEST ZAKOMENTOWANE
-
+             addNotification();
 
             //opis.getText()   DA CI STRINGA OPISU
             //Integer.parseInt(idSprzet.getText())   DA CI ID SPRZETU
