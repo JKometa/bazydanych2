@@ -28,22 +28,13 @@ public class AddNotification extends JFrame {
 
     private void addNotification() {
         DataAccessObject.connect(null,null);
-        dao.addNotification(Integer.parseInt(idSprzet.getText()),1,"NOWE",opis.getText());
+        dao.addNotification(Integer.parseInt(idSprzet.getText()),LoginPage.userData.id,"NOWE",opis.getText());
         DataAccessObject.disconnect();
     }
 
     private void zatwierdzActionPerformed(ActionEvent e) {
         if(!idSprzet.getText().equals("") ){
-            // TODO DODAJ MNIE TUTAJ NOWE ZGLOSZENIE  A POTEM ODKOMENTUJ   TO CO TAM JEST ZAKOMENTOWANE
              addNotification();
-
-            //opis.getText()   DA CI STRINGA OPISU
-            //Integer.parseInt(idSprzet.getText())   DA CI ID SPRZETU
-            //STATUS ZAWSZE BEDZIE USTAWIONE NA NOWE.
-
-
-        //            ClientAplication.mainMenu.setVisible(true);
-        //  this.dispose();
         }
         else{
             JOptionPane.showMessageDialog(this,

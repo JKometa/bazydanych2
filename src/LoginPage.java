@@ -70,6 +70,6 @@ public class LoginPage extends JFrame implements ActionListener {
         DataAccessObject.disconnect();
     }
 
-    private DataAccessObject.Worker userData;
+    static public DataAccessObject.Worker userData;
 
 }

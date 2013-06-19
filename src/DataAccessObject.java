@@ -57,7 +57,6 @@ public class DataAccessObject {
 	ResultSet rset;
 	try {
 
-        //SELECT IdEgz, u.NazwaRodzaju FROM WlasciwosciUzytkowe w inner join Urzadzenie u on w.IdTypu = u.IdSprzetu
 	    stmt = conn.prepareStatement("SELECT IdEgz, u.NazwaRodzaju FROM WlasciwosciUzytkowe w inner join Urzadzenie u on w.IdTypu = u.IdSprzetu");
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
@@ -161,11 +160,14 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+        e.printStackTrace();
         return n;
 	}
 	catch(NullPointerException e2) {
+        e2.printStackTrace();
 	}
+
         return n;
     }
     

@@ -27,7 +27,7 @@ public class EraseList extends JFrame {
 
     private void fillNotificationList() {
         DataAccessObject.connect(null,null);
-        notifications = dao.getNotifications(1);
+        notifications = dao.getNotifications(LoginPage.userData.id);
         for(DataAccessObject.Notification n : notifications) {
             listaZgloszen.add("Id zgloszenia: "+n.id+" Id urzadzenie: "+n.device);
         }

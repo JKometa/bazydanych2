@@ -25,8 +25,7 @@ public class AttachTeam extends JFrame {
 
     private void fillZgloszeniaLista() {
         DataAccessObject.connect(null,null);
-        //TODO zmiana idika admina
-        notifications = dao.getNotifications(1);
+        notifications = dao.getNotifications(LoginPage.userData.id);
         for(DataAccessObject.Notification n: notifications) {
             listaZgloszenia.addElement("Id zgloszenia: "+n.id+" Id urzadzenie: "+n.device);
         }
