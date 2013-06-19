@@ -109,7 +109,7 @@ public class DataAccessObject {
         DataAccessObject.Notification n;
 	    ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM `Zgloszenie` WHERE IdAdministratora=?");
+	    stmt = conn.prepareStatement("SELECT * FROM Zgloszenie WHERE IdAdministratora=?");
 	    stmt.setInt(1, adminId);
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
