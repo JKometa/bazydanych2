@@ -18,6 +18,7 @@ public class DataAccessObject {
         //DataAccessObject dao = new DataAccessObject();
         //DataAccessObject.connect(null, null);
         //DataAccessObject.disconnect();
+
     }
     
     public static void connect(String userName, String password) {
@@ -28,9 +29,9 @@ public class DataAccessObject {
             System.out.println("Connected to db.");
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> SQLException");
+	    //System.out.println(e.getMessage() + "-> SQLException");
 	} catch(ClassNotFoundException e) {
-	    System.out.println(e.getMessage() + "-> class not found");
+	    //System.out.println(e.getMessage() + "-> class not found");
 	} /*catch (InstantiationException ex) {
             Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
@@ -43,7 +44,7 @@ public class DataAccessObject {
 	    if(stmt!=null)stmt.close();
 	    if(conn!=null)conn.close();
 	} catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 3");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 3");
 	}
     }
     
@@ -63,10 +64,10 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
 	}
 	catch(NullPointerException e2) {
-	    System.out.println("Nuull");
+	    //System.out.println("Nuull");
 	}
         return devices;
     }
@@ -76,7 +77,7 @@ public class DataAccessObject {
 	ResultSet rset;
 	try {
 	    stmt = conn.prepareStatement("SELECT A.IdGwarancji, A.NazwaGwaranta, A.PoczatekGwarancji, A.KoniecGwarancji,"+
-                    "A.NumerUmowy, B.Ulica, B.Miasto, B.NrTelefonu FROM Gwarancja A, Gwarant B, `Wlasciwosci uzytkowe` C "+
+                    "A.NumerUmowy, B.Ulica, B.Miasto, B.NrTelefonu FROM Gwarancja A, Gwarant B, `WlasciwosciUzytkowe` C "+
                     "WHERE A.NazwaGwaranta=B.NazwaGwaranta AND C.IdGwarancji=A.IdGwarancji AND C.IdSprzetu=?");
 	    stmt.setInt(1, deviceId);
 	    rset = stmt.executeQuery();
@@ -92,10 +93,10 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
 	}
 	catch(NullPointerException e2) {
-	    System.out.println("Nuull");
+	    //System.out.println("Nuull");
 	}
         return n;
     }
@@ -119,10 +120,10 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
 	}
 	catch(NullPointerException e2) {
-	    System.out.println("Nuull");
+	    //System.out.println("Nuull");
 	}
         return notifs;
     }
@@ -146,10 +147,10 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
 	}
 	catch(NullPointerException e2) {
-	    System.out.println("Nuull");
+	    //System.out.println("Nuull");
 	}
         return workers;
     }
@@ -171,10 +172,10 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
 	}
 	catch(NullPointerException e2) {
-	    System.out.println("Nuull");
+	    //System.out.println("Nuull");
 	}
         return teams;
     }
@@ -204,24 +205,24 @@ public class DataAccessObject {
     
     public void deleteNotifications(int id) {
 	try {
-	    stmt = conn.prepareStatement("DELETE FROM `Zgloszenia napraw` WHERE IdZgloszenia=?");
+	    stmt = conn.prepareStatement("DELETE FROM `Zgloszenie` WHERE IdZgloszenia=?");
 	    stmt.setInt(1, id);
-	    stmt.executeQuery();
+	    stmt.executeUpdate();
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
 	}
     }
     
     public int changeTeamNotification(int notificationId, int teamId) {
 	try {
-	    stmt = conn.prepareStatement("UPDATE `Zgloszenia napraw` SET IdZespolu=? WHERE IdZgloszenia=?");
+	    stmt = conn.prepareStatement("UPDATE `Zgloszenie` SET IdZespolu=? WHERE IdZgloszenia=?");
 	    stmt.setInt(1, teamId);
 	    stmt.setInt(2, notificationId);
-	    stmt.executeQuery();
+	    stmt.executeUpdate();
 	}
 	catch(SQLException e) {
-	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
             return 1;
 	}
         return 0;

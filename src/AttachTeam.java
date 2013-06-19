@@ -26,9 +26,9 @@ public class AttachTeam extends JFrame {
     private void fillZgloszeniaLista() {
         DataAccessObject.connect(null,null);
         //TODO zmiana idika admina
-        LinkedList<DataAccessObject.Notification> notifications = dao.getNotifications(1);
+        notifications = dao.getNotifications(1);
         for(DataAccessObject.Notification n: notifications) {
-            listaZgloszenia.addElement(""+n.id);
+            listaZgloszenia.addElement("Id zgloszenia: "+n.id+" Id urzadzenie: "+n.device);
         }
         DataAccessObject.disconnect();
 
@@ -36,23 +36,33 @@ public class AttachTeam extends JFrame {
 
     private void fillZespolLista() {
         DataAccessObject.connect(null,null);
-        LinkedList<DataAccessObject.Team> teams = dao.getTeams();
+        teams = dao.getTeams();
         for (DataAccessObject.Team t: teams) {
-            listaZespoly.addElement(""+t.name);
+            listaZespoly.addElement("Id zepsolu: "+t.id+" Nazwa: "+t.name);
         }
         DataAccessObject.disconnect();
     }
 
     private void zatwierdzActionPerformed(ActionEvent e) {
 
-        Object attachTeam = zespoly.getSelectedValue();
-        Object attachZgloszenie = zgloszenia.getSelectedValue();
+        int attachIndex = zespoly.getSelectedIndex();
+        int zgloszenieIndex = zgloszenia.getSelectedIndex();
 
+
+        this.changeTeamNotifiaction(teams.get(attachIndex),notifications.get(zgloszenieIndex));
 
         ClientAplication.mainMenu.setVisible(true);
         this.dispose();
 
 
+    }
+
+    private void changeTeamNotifiaction(DataAccessObject.Team team, DataAccessObject.Notification notification) {
+        DataAccessObject.connect(null,null);
+
+        dao.changeTeamNotification(notification.id,team.id);
+
+        DataAccessObject.disconnect();
     }
 
     private void cofnijActionPerformed(ActionEvent e) {
@@ -150,4 +160,8 @@ public class AttachTeam extends JFrame {
     DefaultListModel listaZespoly = new DefaultListModel();
     private ArrayList<String> zgloszeniaLista = new ArrayList<String>();
     private ArrayList<String> zespolyLista = new ArrayList<String>();
+
+    private LinkedList<DataAccessObject.Notification> notifications;
+    private LinkedList<DataAccessObject.Team> teams;
+
 }

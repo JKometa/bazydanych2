@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 /*
  * Created by JFormDesigner on Mon Jun 17 21:41:34 CEST 2013
  */
@@ -15,14 +16,21 @@ import java.util.ArrayList;
  * @author mdz mdz
  */
 public class EraseList extends JFrame {
+    DataAccessObject dao = new DataAccessObject();
+
     public EraseList() {
 
-        listaZgloszen.add("Pierwsze");
-        listaZgloszen.add("Drugie");
-        listaZgloszen.add("Trzecie");
-        listaZgloszen.add("Czwarte");
-        listaZgloszen.add("Piate");
+        fillNotificationList();
         initComponents();
+    }
+
+    private void fillNotificationList() {
+        DataAccessObject.connect(null,null);
+        notifications = dao.getNotifications(1);
+        for(DataAccessObject.Notification n : notifications) {
+            listaZgloszen.add("Id zgloszenia: "+n.id+" Id urzadzenie: "+n.device);
+        }
+        DataAccessObject.disconnect();
     }
 
     private void zgloszeniaValueChanged(ListSelectionEvent e) {
@@ -31,10 +39,18 @@ public class EraseList extends JFrame {
 
     }
 
+    private void deleteNotification(DataAccessObject.Notification notification) {
+        DataAccessObject.connect(null,null);
+        dao.deleteNotifications(notification.id);
+        DataAccessObject.disconnect();
+    }
+
     private void usunActionPerformed(ActionEvent e) {
         Object index = zgloszenia.getSelectedValue();
+        int listIndex = zgloszenia.getSelectedIndex();
         lista.removeElement(index);
         listaZgloszen.remove(index);
+        deleteNotification(notifications.get(listIndex));
     }
 
     private void zakonczActionPerformed(ActionEvent e) {
@@ -121,4 +137,7 @@ public class EraseList extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     private ArrayList<String> listaZgloszen = new ArrayList<String>();
     DefaultListModel lista = new DefaultListModel();
+
+    private LinkedList<DataAccessObject.Notification> notifications;
+
 }

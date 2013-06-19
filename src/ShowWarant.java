@@ -1,155 +1,128 @@
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.*;
+import java.util.LinkedList;
+import javax.swing.*;
+import javax.swing.event.*;
 /*
- * Created by JFormDesigner on Tue Jun 18 12:02:57 CEST 2013
+ * Created by JFormDesigner on Tue Jun 18 18:06:17 PDT 2013
  */
 
 
 
 /**
- * @author mdz mdz
+ * @author Andrzej Kolanowski
  */
 public class ShowWarant extends JFrame {
+
+    private DataAccessObject dao = new DataAccessObject();
+
     public ShowWarant() {
-        urzadzeniaLista.add("Pierwsze");
-        urzadzeniaLista.add("Drugie");
-        urzadzeniaLista.add("Trzecie");
-        urzadzeniaLista.add("Czwarte");
-        urzadzeniaLista.add("Piate");
+        fillDevices();
         initComponents();
     }
 
-    private void urzadzeniaValueChanged(ListSelectionEvent e) {
-        Object urzadzenie = urzadzenia.getSelectedValue();
+    private void fillDevices() {
+        DataAccessObject.connect(null,null);
+        devices = dao.getDevices();
+        for(DataAccessObject.Device d: devices) {
+            listaUrzadzenia.addElement("Id: "+d.id+" Typ: "+d.type);
+        }
+        DataAccessObject.disconnect();
+    }
 
+    private void button1ActionPerformed(ActionEvent e) {
         ClientAplication.mainMenu.setVisible(true);
         this.dispose();
     }
 
-    private void cofnijActionPerformed(ActionEvent e) {
-        ClientAplication.mainMenu.setVisible(true);
-        this.dispose();
-    }
+    private void list1ValueChanged(ListSelectionEvent e) {
+        int index = list1.getSelectedIndex();
 
-    private void zakonczActionPerformed(ActionEvent e) {
-        ClientAplication.mainMenu.setVisible(true);
-        this.dispose();
+        DataAccessObject.connect(null,null);
+        DataAccessObject.Warranty warranty = dao.getWarranty(devices.get(index).id);
+        DataAccessObject.disconnect();
+        if(warranty.id == 0) {
+            textArea1.setText("Brak zdefiniowanej gwarancji dla urządzenia");
+            return;
+        }
+        textArea1.setText("Id gwarancji: "+warranty.id+"\n"+
+        "Nazwa: "+warranty.warrantyName+"\n"+
+        "Ulica: "+warranty.street+"\n"+
+        "Miasto: "+warranty.city+"\n"+
+        "Rozpoczecie gwarancji: "+warranty.begin+"\n"+
+        "Zakonczenie gwarancji: "+warranty.end+"\n"+
+        "Numer gwarancji: "+warranty.nr);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - mdz mdz
-        panel1 = new JPanel();
+        // Generated using JFormDesigner Evaluation license - Andrzej Kolanowski
         scrollPane1 = new JScrollPane();
-        urzadzenia = new JList();
-        cofnij = new JButton();
-        panel2 = new JPanel();
-        gwarant = new JTextPane();
-        zakoncz = new JButton();
+        list1 = new JList();
+        textArea1 = new JTextArea();
+        button1 = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
-        contentPane.setLayout(new CardLayout());
+        contentPane.setLayout(new GridBagLayout());
+        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {198, 183, 0};
+        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {237, 27, 0};
+        ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
+        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
 
-        //======== panel1 ========
+        //======== scrollPane1 ========
         {
 
-            // JFormDesigner evaluation mark
-            panel1.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+            //---- list1 ----
+            list1.addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    list1ValueChanged(e);
+                }
+            });
+            scrollPane1.setViewportView(list1);
+        }
+        contentPane.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 5, 5), 0, 0));
+        contentPane.add(textArea1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 5, 0), 0, 0));
 
-            panel1.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0};
-            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {1.0, 0.0, 1.0E-4};
-
-            //======== scrollPane1 ========
-            {
-
-                //---- urzadzenia ----
-                urzadzenia.addListSelectionListener(new ListSelectionListener() {
-                    @Override
-                    public void valueChanged(ListSelectionEvent e) {
-                        urzadzeniaValueChanged(e);
-                    }
-                });
-                scrollPane1.setViewportView(urzadzenia);
+        //---- button1 ----
+        button1.setText("Cofnij");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                button1ActionPerformed(e);
             }
-            panel1.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
-
-            //---- cofnij ----
-            cofnij.setText("Cofnij");
-            cofnij.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    cofnijActionPerformed(e);
-                }
-            });
-            panel1.add(cofnij, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
-        }
-        contentPane.add(panel1, "card1");
-
-        //======== panel2 ========
-        {
-            panel2.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel2.getLayout()).columnWidths = new int[] {0, 0};
-            ((GridBagLayout)panel2.getLayout()).rowHeights = new int[] {0, 0, 0};
-            ((GridBagLayout)panel2.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-            ((GridBagLayout)panel2.getLayout()).rowWeights = new double[] {1.0, 0.0, 1.0E-4};
-            panel2.add(gwarant, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
-
-            //---- zakoncz ----
-            zakoncz.setText("Zakoncz");
-            zakoncz.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    zakonczActionPerformed(e);
-                }
-            });
-            panel2.add(zakoncz, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
-        }
-        contentPane.add(panel2, "card2");
+        });
+        contentPane.add(button1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 0), 0, 0));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
 
-        urzadzenia.setModel(listaUrzadzenia);
-        for(int i = 0; i <= urzadzeniaLista.size()-1; ++i){
-            listaUrzadzenia.addElement(urzadzeniaLista.get(i));
+        list1.setModel(listaUrzadzenia);
 
-        }
         this.setSize(600,400);
-        this.add(panel2);
+        this.add(scrollPane1);
+        this.add(textArea1);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - mdz mdz
-    private JPanel panel1;
+    // Generated using JFormDesigner Evaluation license - Andrzej Kolanowski
     private JScrollPane scrollPane1;
-    private JList urzadzenia;
-    private JButton cofnij;
-    private JPanel panel2;
-    private JTextPane gwarant;
-    private JButton zakoncz;
+    private JList list1;
+    private JTextArea textArea1;
+    private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-    DefaultListModel listaUrzadzenia = new DefaultListModel();
-    private ArrayList<String> urzadzeniaLista = new ArrayList<String>();
+    private DefaultListModel listaUrzadzenia = new DefaultListModel();
+
+    private LinkedList<DataAccessObject.Device> devices;
+
 }
+
+

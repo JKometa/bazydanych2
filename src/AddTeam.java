@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
  * @author unknown
  */
 public class AddTeam extends JFrame{
+
+    private DataAccessObject dao = new DataAccessObject();
+
     public AddTeam() {
         initComponents();
     }
@@ -19,7 +22,7 @@ public class AddTeam extends JFrame{
     private void nextActionPerformed(ActionEvent e) {
         // TODO add your code here
         if(!idSprzetu.getText().equals("")  && !idAdministratora.getText().equals("")  && !idLokalizacji.getText().equals("")  && !NazwaGwaranta.getText().equals("") ){
-            //Rob costam
+            //addTeam(Integer.parseInt(idSprzetu.getText()), );
             zgloszenie = new Zgloszenie(-1, Integer.parseInt(idSprzetu.getText()), Integer.parseInt(idLokalizacji.getText()), Integer.parseInt(idAdministratora.getText()), NazwaGwaranta.getText());
             ClientAplication.mainMenu.setVisible(true);
             this.dispose();
@@ -27,6 +30,12 @@ public class AddTeam extends JFrame{
         else{
             //wypelnij pole tektowe bo nie pojde dalej :(
         }
+    }
+
+    private void addTeam(int deviceId) {
+        DataAccessObject.connect(null,null);
+        //dao.addNotification(deviceId)
+        DataAccessObject.disconnect();
     }
 
     private void cofnijActionPerformed(ActionEvent e) {
