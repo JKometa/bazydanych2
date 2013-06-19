@@ -82,6 +82,7 @@ public class MainMenu extends JFrame implements ActionListener {
         this.setJMenuBar(menuBar);
         this.pack();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     public void actionPerformed(ActionEvent e) {
