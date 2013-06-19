@@ -28,9 +28,13 @@ public class AddNotification extends JFrame {
             // TODO DODAJ MNIE TUTAJ NOWE ZGLOSZENIE  A POTEM ODKOMENTUJ   TO CO TAM JEST ZAKOMENTOWANE
 
 
+            //opis.getText()   DA CI STRINGA OPISU
+            //Integer.parseInt(idSprzet.getText())   DA CI ID SPRZETU
+            //STATUS ZAWSZE BEDZIE USTAWIONE NA NOWE.
 
-//            ClientAplication.mainMenu.setVisible(true);
-//            this.dispose();
+
+        //            ClientAplication.mainMenu.setVisible(true);
+        //  this.dispose();
         }
         else{
             JOptionPane.showMessageDialog(this,
@@ -45,7 +49,8 @@ public class AddNotification extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Andrzej Kolanowski
         label1 = new JLabel();
-        opis = new JTextField();
+        scrollPane1 = new JScrollPane();
+        opis = new JTextArea();
         label2 = new JLabel();
         idSprzet = new JTextField();
         label3 = new JLabel();
@@ -69,10 +74,18 @@ public class AddNotification extends JFrame {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- opis ----
-        opis.setToolTipText("Wype\u0142nij opis");
-        opis.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-        contentPane.add(opis, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+        //======== scrollPane1 ========
+        {
+
+            //---- opis ----
+            opis.setToolTipText("Wype\u0142nij opis");
+            opis.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+            opis.setMaximumSize(new Dimension(300, 200));
+            opis.setLineWrap(true);
+            opis.setWrapStyleWord(true);
+            scrollPane1.setViewportView(opis);
+        }
+        contentPane.add(scrollPane1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -148,7 +161,8 @@ public class AddNotification extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Andrzej Kolanowski
     private JLabel label1;
-    private JTextField opis;
+    private JScrollPane scrollPane1;
+    private JTextArea opis;
     private JLabel label2;
     private JTextField idSprzet;
     private JLabel label3;
