@@ -1,0 +1,9 @@
+uzytkownik pierwszy:
+
+Login: michal
+haslo: admin1
+
+uzytkownik drugi:
+
+Login: andrzej
+haslo: admin2
