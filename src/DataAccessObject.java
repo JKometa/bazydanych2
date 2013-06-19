@@ -144,9 +144,9 @@ public class DataAccessObject {
 	    while(rset.next()) {
                 n = new DataAccessObject.Worker();
                 n.id = Integer.parseInt(rset.getObject("IdPracownika").toString());
-		n.name = rset.getObject("Imie").toString();
-		n.surname = rset.getObject("Nazwisko").toString();
-		n.status = rset.getObject("Status").toString();
+		        n.name = rset.getObject("Imie").toString();
+		        n.surname = rset.getObject("Nazwisko").toString();
+		        n.status = rset.getObject("Status").toString();
                 n.teamId = Integer.parseInt(rset.getObject("IdZespolu").toString());
 	    }
 	    rset.close();
