@@ -24,12 +24,8 @@ public class AddNotification extends JFrame {
     }
 
     private void zatwierdzActionPerformed(ActionEvent e) {
-        if(!opis.getText().equals("") && !idSprzet.getText().equals("")){
+        if(!idSprzet.getText().equals("") ){
             // TODO DODAJ MNIE TUTAJ NOWE ZGLOSZENIE  A POTEM ODKOMENTUJ   TO CO TAM JEST ZAKOMENTOWANE
-
-            //opis.getText()   DA CI STRINGA OPISU
-            //Integer.parseInt(idSprzet.getText())   DA CI ID SPRZETU
-            //STATUS ZAWSZE BEDZIE USTAWIONE NA NOWE
 
 
 
@@ -41,14 +37,13 @@ public class AddNotification extends JFrame {
                     "Proszę wypełnić wszystkie pola!",
                     "Błąd danych",
                     JOptionPane.WARNING_MESSAGE);
-
         }
 
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - mdz mdz
+        // Generated using JFormDesigner Evaluation license - Andrzej Kolanowski
         label1 = new JLabel();
         opis = new JTextField();
         label2 = new JLabel();
@@ -144,13 +139,14 @@ public class AddNotification extends JFrame {
             }
         });
         filter1.setNegativeAccepted(true);
-        idSprzet.setDocument(filter1);
+        filter2.setNegativeAccepted(true);
+        idSprzet.setDocument(filter2);
 
 
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - mdz mdz
+    // Generated using JFormDesigner Evaluation license - Andrzej Kolanowski
     private JLabel label1;
     private JTextField opis;
     private JLabel label2;
@@ -162,5 +158,6 @@ public class AddNotification extends JFrame {
     private JButton zatwierdz;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     JTextFieldFilter filter1 = new JTextFieldFilter(JTextFieldFilter.NUMERIC);
+    JTextFieldFilter filter2 = new JTextFieldFilter(JTextFieldFilter.NUMERIC);
 
 }

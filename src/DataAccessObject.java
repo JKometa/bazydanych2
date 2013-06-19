@@ -56,21 +56,25 @@ public class DataAccessObject {
         DataAccessObject.Device n;
 	ResultSet rset;
 	try {
-	    stmt = conn.prepareStatement("SELECT * FROM Urzadzenie");
+
+        //SELECT IdEgz, u.NazwaRodzaju FROM WlasciwosciUzytkowe w inner join Urzadzenie u on w.IdTypu = u.IdSprzetu
+	    stmt = conn.prepareStatement("SELECT IdEgz, u.NazwaRodzaju FROM WlasciwosciUzytkowe w inner join Urzadzenie u on w.IdTypu = u.IdSprzetu");
 	    rset = stmt.executeQuery();
 	    while(rset.next()) {
                 n = new DataAccessObject.Device();
-                n.id = Integer.parseInt(rset.getObject("IdSprzetu").toString());
-		n.type = rset.getObject("NazwaRodzaju").toString();
+                n.id = Integer.parseInt(rset.getObject("IdEgz").toString());
+		        n.type = rset.getObject("NazwaRodzaju").toString();
                 devices.add(n);
 	    }
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+        e.printStackTrace();
 	}
 	catch(NullPointerException e2) {
-	    //System.out.println("Nuull");
+	    System.out.println("Nuull");
+        e2.printStackTrace();
 	}
         return devices;
     }
@@ -96,10 +100,12 @@ public class DataAccessObject {
 	    rset.close();
 	}
 	catch(SQLException e) {
-	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+	    System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+        e.printStackTrace();
 	}
 	catch(NullPointerException e2) {
-	    //System.out.println("Nuull");
+	    System.out.println("Nuull");
+        e2.printStackTrace();
 	}
         return n;
     }
@@ -116,8 +122,12 @@ public class DataAccessObject {
                 n = new DataAccessObject.Notification();
                 n.admin = adminId;
                 n.id = Integer.parseInt(rset.getObject("IdZgloszenia").toString());
-		n.device = Integer.parseInt(rset.getObject("IdSprzetu").toString());
-                n.team = Integer.parseInt(rset.getObject("IdZespolu").toString());
+		        n.device = Integer.parseInt(rset.getObject("IdSprzetu").toString());
+                if(rset.getObject("IdZespolu") == null) {
+                    n.team = -1;
+                } else {
+                    n.team = Integer.parseInt(rset.getObject("IdZespolu").toString());
+                }
                 n.opis = rset.getObject("Opis").toString();
                 notifs.add(n);
 	    }
