@@ -214,8 +214,7 @@ public class DataAccessObject {
         return teams;
     }
     
-    public int addNotification(int deviceId, int teamId, int adminId, String status, String opis) {
-	ResultSet rset;
+    public int addNotification(int deviceId, int teamId, int adminId, String status, String opis) {  	ResultSet rset;
         try {
 
             stmt.executeQuery();
