@@ -193,9 +193,11 @@ public class DataAccessObject {
 	}
 	catch(SQLException e) {
 	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+        e.printStackTrace();
 	}
 	catch(NullPointerException e2) {
 	    //System.out.println("Nuull");
+        e2.printStackTrace();
 	}
         return workers;
     }
@@ -218,8 +220,10 @@ public class DataAccessObject {
 	}
 	catch(SQLException e) {
 	    //System.out.println(e.getMessage() + "-> problem z połczeniem 4");
+        e.printStackTrace();
 	}
 	catch(NullPointerException e2) {
+        e2.printStackTrace();
 	    //System.out.println("Nuull");
 	}
         return teams;

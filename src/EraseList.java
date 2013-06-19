@@ -74,18 +74,6 @@ public class EraseList extends JFrame {
         this.dispose();
     }
 
-    private void sortowanieActionPerformed(ActionEvent e) {
-       String command =  e.getActionCommand();
-        if(command.equals("id"))
-            //TODO zrob cos
-        ;
-        if(command.equals("nazwa"))
-            //TODO zrob cos
-            ;
-        if(command.equals("status"))
-            //TODO zrob cos
-            ;
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
